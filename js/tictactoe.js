@@ -21,12 +21,12 @@ const X = "Savior (X)";
 const O = "Dr. DOM (O)";
 
 //Some of your epic battles:
-const BATTLEFIELD =
-    [
-        [O, X, O],
-        [X, X, X],
-        [O, O, X],
-    ];
+//const BATTLEFIELD =
+//    [
+//        [O, X, O],
+//        [X, X, X],
+//        [O, O, X],
+//    ];
 // const BATTLEFIELD =
 //     [
 //         [null, X, X],
@@ -53,14 +53,14 @@ const BATTLEFIELD =
 //         [O, X, O, X],
 //         [X, O, X, X],
 //     ];
-// const BATTLEFIELD =
-//     [
-//         [O, X, X, X, null],
-//         [X, O, X, O, O],
-//         [O, X, O, null,  X],
-//         [X, null, X, O, O],
-//         [X, null, O, X, O],
-//     ];
+ const BATTLEFIELD =
+     [
+         [O, X, X, X, null],
+         [X, O, X, O, O],
+         [O, X, O, null,  X],
+         [X, null, X, O, O],
+         [X, null, O, X, O],
+     ];
 
 //TODO: Check if the battle is over, and if so, announce the winner!
 
@@ -68,3 +68,92 @@ const BATTLEFIELD =
 // Check Vertical
 // Check Main Diagonal
 // Check Anti Diagonal
+
+// immer erstes Element nehmen und mit dem Rest vergleichen
+
+const size = BATTLEFIELD.length;
+let winner = null;
+let winType = null;
+
+// Check Horizontal
+for (let i = 0; i < size; i++) {
+    let first = BATTLEFIELD[i][0];
+    let allEqual = first !== null;
+
+    for (let j = 1; j < size; j++) {
+        if (BATTLEFIELD[i][j] !== first) { //Wird geprüft ob das Feld anders ist als das erste wenn ja kein GGewinn!
+            allEqual = false;
+            break;
+        }
+    }
+
+    if (allEqual) {
+        winner = first;
+        winType = "horizontal";
+        break;
+    }
+}
+
+// Check Vertical
+if (winner === null) {
+    for (let j = 0; j < size; j++) {
+        let first = BATTLEFIELD[0][j];
+        let allEqual = first !== null;
+
+        for (let i = 1; i < size; i++) {
+            if (BATTLEFIELD[i][j] !== first) {
+                allEqual = false;
+                break;
+            }
+        }
+
+        if (allEqual) {
+            winner = first;
+            winType = "vertical";
+            break;
+        }
+    }
+}
+
+// Check Main Diagonal
+if (winner === null) {
+    let first = BATTLEFIELD[0][0];
+    let allEqual = first !== null;
+
+    for (let i = 1; i < size; i++) {
+        if (BATTLEFIELD[i][i] !== first) {
+            allEqual = false;
+            break;
+        }
+    }
+
+    if (allEqual) {
+        winner = first;
+        winType = "main-diagonal";
+    }
+}
+
+// Check Anti Diagonal --> mit Hilfe erledigt
+if (winner === null) {
+    let first = BATTLEFIELD[0][size - 1];
+    let allEqual = first !== null;
+
+    for (let i = 1; i < size; i++) {
+        if (BATTLEFIELD[i][size - 1 - i] !== first) {
+            allEqual = false;
+            break;
+        }
+    }
+
+    if (allEqual) {
+        winner = first;
+        winType = "anti-diagonal";
+    }
+}
+
+// Output
+if (winner !== null) {
+    console.log(winner + " won the battle (" + winType + ").");
+} else {
+    console.log("No winner yet.");
+}
