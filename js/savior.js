@@ -26,7 +26,12 @@
  * First of all, we need to be able to read the text again,
  * without the risk of catching an eye infection!
  */
+let paragraphs = document.getElementsByTagName("p");
 
+for (let paragraph of paragraphs) {
+    paragraph.style.color = "";
+    paragraph.style.backgroundColor = "";
+}
 
 
 
@@ -35,7 +40,11 @@
  * Great job! So much easier on the eyes! Now, let's tackle those minions!
  * Can't we just remove them all together?
  */
+//ich hole mir die echte Heldenliste und geh ein Element zurück da Liegt die Minion Liste
+let heroesList = document.getElementById("heroes_of_the_web");
+let minionsList = heroesList.previousElementSibling;
 
+minionsList.remove();
 
 
 
@@ -44,6 +53,9 @@
  * Wow! You are so powerful! Quick now, set our heroes of the web free!
  * And while at it, let the world know again, that they are back in town!
  */
+heroesList.style.visibility = "visible";
+document.getElementById("message").nextElementSibling.textContent =
+    "Let us introduce to you our list of Web-Heroes:";
 
 
 
@@ -52,8 +64,12 @@
  * Our Webpage is safe again! But Dr. Dom is still holding our Headline as a hostage!
  * Do your thing, savior!
  */
+document.getElementById("title").textContent =
+    "We, the mighty Heroes of the web, will protect you!";
 
-
+//den anderen Text darunter auch noch überschreiben:
+document.getElementById("message").textContent =
+    "We care for simplistic design!";
 
 /**
  * TODO 5:
@@ -63,3 +79,10 @@
  * It might sound paranoid. But I can't get rid of the feeling, that he is still here,
  * somewhere in the DOM. I can still feel his Code. Can you identify the source and remove it?
  */
+let scripts = document.getElementsByTagName("script");
+
+for (let script of scripts) {
+    if (script.src.includes("dr.dom.js")) {
+        script.remove();
+    }
+}

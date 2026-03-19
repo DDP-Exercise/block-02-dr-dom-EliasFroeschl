@@ -15,6 +15,20 @@
  *******************************************************/
 
 //TODO: Place one object here.
+const SAVIOR = {
+    name: "Elias Fröschl",
+    age: 21,
+    location: "Hagenberg",
+    hobbies: ["Football", "Gym", "Motorcycle"],
+    type_of_companion: "dog",
+    companion: {
+        name: "Willi",
+        age: 2,
+        breed: "Dachshund",
+        skill: "therapy dog",
+    }
+}
+
 
 /*******************************************************
  *   DO NOT CHANGE THE CODE BELOW!
